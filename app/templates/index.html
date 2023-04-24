@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    </style>
+    <title>Дискретная математика</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="/static/main.js"></script>
+</head>
+<body>
+    <div style="float: left; width: 50%">
+        <span class="input-group-addon">Выберите вариант</span>
+        <select id="rk-variant" class="selectpicker form-control">
+            {% for variant in variants %}
+                <option value= "{{variant}}" SELECTED>{{variant}}</option>"
+            {% endfor %}
+        </select>
+        <br/>
+        <label for="nodes-to-visit">Рассматриваемые вершины</label>
+        <input type="text" id="nodes-to-visit" placeholder="(например: a,b,c)" name="nodes-to-visit" minlength="1">
+        <button class="btn">Решить</button>
+
+        <div class="result-table">
+            <table>
+                <thead>
+                    <tr>
+                        {% for col in column_names %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in row_data %}
+                    <tr>
+                      {% for row_ in row %}
+                      <td>{{row_}}</td>
+                      {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <ul class="connectivity-components"></ul>
+    </div>
+
+    <div style="float: right; width: 50%">
+        <img class="graph-image">
+    </div>
+
+</body>
+</html>
