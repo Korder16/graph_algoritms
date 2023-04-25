@@ -31,28 +31,14 @@
         <input type="text" id="nodes-to-visit" placeholder="(например: a,b,c)" name="nodes-to-visit" minlength="1">
         <button class="btn">Решить</button>
 
-        <div class="result-table">
-            <table>
-                <thead class="result-table-head"></thead>
-                <tbody id="result-table-body"></tbody>
-                <!--
-                    <tbody>
-                        {% for row in row_data %}
-                            <tr>
-                            {% for row_ in row %}
-                                <td>{{row_}}</td>
-                            {% endfor %}
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                -->
-            </table>
+        <div>
+            <table id="result-table"></table>
         </div>
-        <ul class="connectivity-components"></ul>
+        <ul id="connectivity-components"></ul>
     </div>
 
     <div style="float: right; width: 50%">
-        <img class="graph-image">
+        <img id="graph-image">
     </div>
 
 </body>
