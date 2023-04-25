@@ -68,7 +68,13 @@ $(document).ready(function(){
                 }
             },
             error: function(ajaxContext) {
-                alert('Алгоритм не работает на рассматриваемых вершинах:' + nodes_to_visit);
+                if(nodes_to_visit) {
+                    alert('Алгоритм не работает на рассматриваемых вершинах:' + nodes_to_visit);
+                }
+                else {
+                    alert('Алгоритм не работает: не указаны вершины для рассмотрения');
+                }
+
             }
         })
     })
