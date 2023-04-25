@@ -13,7 +13,7 @@ def fill_columns(adj_matrix, node_infos: list):
         adj_matrix.insert(col_number, f'Г{info.name}', info.transitive_closure.distances + [''] * (2 + len(node_infos)))
         col_number += 1
 
-    adj_matrix.insert(col_number, f' ', ['\\'] * 10 + [''] * (2 + len(node_infos)))
+    adj_matrix.insert(col_number, ' ', ['\\'] * 10 + [''] * (2 + len(node_infos)))
 
 
 def generate_result_table(adj_matrix, node_infos: list):

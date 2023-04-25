@@ -24,7 +24,6 @@ def solve_rk(variant, nodes_to_visit: list):
 @app.route('/')
 def show_rk_solution():
 
-
     if request.is_json:
         variant_number = request.args.get('variant_number', default=0, type=int)
         variant = rk_variants[variant_number]
@@ -46,7 +45,6 @@ def show_rk_solution():
                 'row_data': row_data
             }
         )
-
 
     return render_template('index.html', variants=rk_variants.keys())
 
