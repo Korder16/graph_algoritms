@@ -12,7 +12,29 @@ $(document).ready(function(){
             contentType: 'application/json',
             data: {},
             success: function(response){
-                $(".result-table").load(location.href + "?variant_number=" + rk_variant_text + "&nodes_to_visit=" + nodes_to_visit + " .result-table")
+
+                $(".result-table-head th").remove()
+
+                $("#result-table-body tr").remove()
+                $("#result-table-body td").remove()
+
+                for(var i = 0; i < response.column_names.length; i++) {
+                    $(".result-table-head").append('<th>' + response.column_names[i] + '</th>')
+                }
+
+                const table_body = document.getElementById("result-table-body");
+                for(var i = 0; i < response.row_data.length; i++) {
+                    const row = response.row_data[i];
+                    var row_element = document.createElement('tr')
+                    for(var j = 0; j < row.length; j++) {
+                        var td = document.createElement('td')
+                        var td_text = document.createTextNode(row[j])
+                        td.appendChild(td_text)
+                        row_element.appendChild(td)
+                    }
+
+                    table_body.appendChild(row_element)
+                }
 
                 $('.graph-image').attr('src', 'data:image/png;base64,' + response.graph_img_bytes)
 

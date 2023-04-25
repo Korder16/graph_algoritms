@@ -23,32 +23,29 @@
         <span class="input-group-addon">Выберите вариант</span>
         <select id="rk-variant" class="selectpicker form-control">
             {% for variant in variants %}
-                <option value= "{{variant}}" SELECTED>{{variant}}</option>"
+                <option value= "{{variant}}">{{variant}}</option>"
             {% endfor %}
         </select>
         <br/>
-        <label for="nodes-to-visit">Рассматриваемые вершины</label>
+        <label for="nodes-to-visit">Какие вершины рассматривал студент?</label>
         <input type="text" id="nodes-to-visit" placeholder="(например: a,b,c)" name="nodes-to-visit" minlength="1">
         <button class="btn">Решить</button>
 
         <div class="result-table">
             <table>
-                <thead>
-                    <tr>
-                        {% for col in column_names %}
-                            <th>{{ col }}</th>
+                <thead class="result-table-head"></thead>
+                <tbody id="result-table-body"></tbody>
+                <!--
+                    <tbody>
+                        {% for row in row_data %}
+                            <tr>
+                            {% for row_ in row %}
+                                <td>{{row_}}</td>
+                            {% endfor %}
+                            </tr>
                         {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for row in row_data %}
-                    <tr>
-                      {% for row_ in row %}
-                      <td>{{row_}}</td>
-                      {% endfor %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
+                    </tbody>
+                -->
             </table>
         </div>
         <ul class="connectivity-components"></ul>
