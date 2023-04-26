@@ -1,13 +1,9 @@
 from dataclasses import dataclass
 import networkx as nx
-import matplotlib.pyplot as plt
 import pandas as pd
 from .table_utils import generate_result_table
-import base64
-from io import BytesIO
 
-plt.switch_backend('Agg')
-
+from ..graph_utils import rename_adj_matrix_impl, create_graph_from_adj_matrix, draw_graph
 
 @dataclass
 class transitive_clouse_info:
@@ -119,18 +115,6 @@ class graph_utils:
         return self.__node_infos
 
 
-def create_graph_from_adj_matrix(matrix):
-    return nx.from_pandas_adjacency(matrix, create_using=nx.DiGraph)
-
-
-def draw_graph(graph: nx.DiGraph, color_map: list):
-    nx.draw(graph, node_color=color_map, with_labels=True)
-    buff = BytesIO()
-    plt.savefig(buff, format='png')
-    plt.close()
-    return base64.b64encode(buff.getbuffer()).decode('ascii')
-
-
 def color_connectivity_components_in_graph(graph: nx.DiGraph, connectivity_components: list, colors: list):
     color_map = []
 
@@ -180,10 +164,7 @@ def rename_adj_matrix(adj_matrix: pd.DataFrame):
         9: 'k'
     }
 
-    adj_matrix = adj_matrix.rename(columns=mapping)
-    adj_matrix = adj_matrix.rename(index=mapping)
-    return adj_matrix
-
+    return rename_adj_matrix_impl(adj_matrix, mapping)
 
 def process_graph(adj_matrix: pd.DataFrame, nodes_to_view: list, colors: list):
 
