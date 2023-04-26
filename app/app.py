@@ -21,8 +21,8 @@ def solve_rk(variant, nodes_to_visit: list):
     return process_graph(adj_matrix, nodes_to_visit, colors)
 
 
-@app.route('/')
-def show_rk_solution():
+@app.route('/malgrange')
+def solve_malgrange_rk():
 
     if request.is_json:
         variant_number = request.args.get('variant_number', default=0, type=int)
@@ -46,7 +46,33 @@ def show_rk_solution():
             }
         )
 
-    return render_template('index.html', variants=rk_variants.keys())
+    return render_template('malgrange.html', variants=rk_variants.keys())
+
+@app.route('/dijkstra')
+def solve_dijkstra_rk():
+
+    if request.is_json:
+        variant_number = request.args.get('variant_number', default=0, type=int)
+        variant = rk_variants[variant_number]
+
+        nodes_to_visit = request.args.get('nodes_to_visit', default='b,d,g', type=str)
+        result_table, node_infos, graph_img_bytes = solve_rk(variant, nodes_to_visit.split(','))
+
+        row_data = []
+        for index, row in result_table.iterrows():
+            row_data.append([index] + row.tolist())
+
+        column_names = np.insert(result_table.columns.values, 0, ' ')
+
+        return jsonify(
+            {
+                'graph_img_bytes': graph_img_bytes,
+                'column_names': column_names.tolist(),
+                'row_data': row_data
+            }
+        )
+
+    return render_template('dijkstra.html', variants=rk_variants.keys())
 
 
 if __name__ == '__main__':
