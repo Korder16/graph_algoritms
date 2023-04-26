@@ -80,6 +80,10 @@ def solve_dijkstra_rk():
 
     return render_template('dijkstra.html', variants=dijkstra.rk_variants.keys())
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 
 if __name__ == '__main__':
     from waitress import serve
