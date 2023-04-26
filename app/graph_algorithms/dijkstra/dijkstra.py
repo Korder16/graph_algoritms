@@ -19,4 +19,4 @@ def process_graph(adj_matrix: pd.DataFrame):
     graph = create_graph_from_adj_matrix(adj_matrix)
 
     img_bytes = draw_graph(graph)
-    return img_bytes
+    return adj_matrix, img_bytes

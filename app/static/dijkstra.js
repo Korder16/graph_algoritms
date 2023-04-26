@@ -11,36 +11,36 @@ $(document).ready(function(){
             data: {},
             success: function(response){
 
-                // $('#result-table th').remove()
-                // $('#result-table tr').remove()
-                // $('#result-table td').remove()
+                $('#result-table th').remove()
+                $('#result-table tr').remove()
+                $('#result-table td').remove()
 
-                // const table = document.getElementById('result-table')
-                // var table_head = document.createElement('thead')
+                const table = document.getElementById('result-table')
+                var table_head = document.createElement('thead')
 
-                // for(var i = 0; i < response.column_names.length; i++) {
-                //     var th_element = document.createElement('th')
-                //     var column_name_text_node = document.createTextNode(response.column_names[i])
+                for(var i = 0; i < response.column_names.length; i++) {
+                    var th_element = document.createElement('th')
+                    var column_name_text_node = document.createTextNode(response.column_names[i])
 
-                //     th_element.appendChild(column_name_text_node)
-                //     table_head.appendChild(th_element)
-                // }
-                // table.appendChild(table_head)
+                    th_element.appendChild(column_name_text_node)
+                    table_head.appendChild(th_element)
+                }
+                table.appendChild(table_head)
 
-                // const table_body = document.createElement('tbody');
-                // table.appendChild(table_body)
-                // for(var i = 0; i < response.row_data.length; i++) {
-                //     const row = response.row_data[i];
-                //     var row_element = document.createElement('tr')
-                //     for(var j = 0; j < row.length; j++) {
-                //         var td = document.createElement('td')
-                //         var td_text = document.createTextNode(row[j])
-                //         td.appendChild(td_text)
-                //         row_element.appendChild(td)
-                //     }
+                const table_body = document.createElement('tbody');
+                table.appendChild(table_body)
+                for(var i = 0; i < response.row_data.length; i++) {
+                    const row = response.row_data[i];
+                    var row_element = document.createElement('tr')
+                    for(var j = 0; j < row.length; j++) {
+                        var td = document.createElement('td')
+                        var td_text = document.createTextNode(row[j])
+                        td.appendChild(td_text)
+                        row_element.appendChild(td)
+                    }
 
-                //     table_body.appendChild(row_element)
-                // }
+                    table_body.appendChild(row_element)
+                }
 
 
                 $('#graph-image').attr('src', 'data:image/png;base64,' + response.graph_img_bytes)

@@ -36,7 +36,7 @@ def solve_malgrange_rk():
         variant = malgrange.rk_variants[variant_number]
 
         nodes_to_visit = request.args.get('nodes_to_visit', type=str)
-        result_table, node_infos, graph_img_bytes = solve_malgrange_rk_impl(variant, nodes_to_visit.split(','))
+        result_table, node_infos, graph_img_bytes = solve_malgrange_rk_impl(variant, nodes_to_visit.replace(' ', '').split(','))
 
         row_data = []
         for index, row in result_table.iterrows():
@@ -62,18 +62,19 @@ def solve_dijkstra_rk():
         variant_number = request.args.get('variant_number', type=int)
         variant = dijkstra.rk_variants[variant_number]
 
-    #     row_data = []
-    #     for index, row in result_table.iterrows():
-    #         row_data.append([index] + row.tolist())
+        result_table, graph_img_bytes = solve_dijkstra_rk_impl(variant)
 
-    #     column_names = np.insert(result_table.columns.values, 0, ' ')
-        graph_img_bytes = solve_dijkstra_rk_impl(variant)
+        row_data = []
+        for index, row in result_table.iterrows():
+            row_data.append([index] + row.tolist())
+
+        column_names = np.insert(result_table.columns.values, 0, ' ')
 
         return jsonify(
             {
                 'graph_img_bytes': graph_img_bytes,
-                # 'column_names': column_names.tolist(),
-                # 'row_data': row_data
+                'column_names': column_names.tolist(),
+                'row_data': row_data
             }
         )
 
@@ -81,6 +82,5 @@ def solve_dijkstra_rk():
 
 
 if __name__ == '__main__':
-    # from waitress import serve
-    # serve(app, host='0.0.0.0', port=5000)
-    app.run()
+    from waitress import serve
+    serve(app, host='0.0.0.0', port=5000)
